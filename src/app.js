@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -19,6 +20,7 @@ class App{
   };
 
   middleware(){
+    this.server.use(cors());
     this.server.use(
       '/files', 
       express.static(path.resolve(__dirname, '..', 'uploads'))
