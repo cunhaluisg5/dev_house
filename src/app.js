@@ -9,28 +9,30 @@ const __dirname = path.dirname(__filename);
 
 import routes from './routes.js';
 
-class App{
-  constructor(){
+class App {
+  constructor() {
     this.server = express();
 
-    mongoose.connect('mongodb+srv://devhouse:devhouse@devhouse.hxehoiv.mongodb.net/devhouse?retryWrites=true&w=majority');
+    mongoose.connect(
+      'mongodb+srv://devhouse:devhouse@devhouse.hxehoiv.mongodb.net/devhouse?retryWrites=true&w=majority'
+    );
 
     this.middleware();
     this.routes();
-  };
+  }
 
-  middleware(){
+  middleware() {
     this.server.use(cors());
     this.server.use(
-      '/files', 
+      '/files',
       express.static(path.resolve(__dirname, '..', 'uploads'))
     );
     this.server.use(express.json());
   }
 
-  routes(){
+  routes() {
     this.server.use(routes);
   }
-};
+}
 
 export default new App().server;
